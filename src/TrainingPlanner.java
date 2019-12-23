@@ -1,4 +1,10 @@
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -10,7 +16,10 @@ import java.util.Scanner;
  */
 public class TrainingPlanner {
 	
-	private ArrayList<User> users;
+	private HashSet<String> usernameSet;
+	private static String DATE_FORMAT = "dd MM yyyy";
+	private static String USER_DIR = "users";
+	private static String USER_EXT = ".tpu";
 	
 	/*
 	 * A main function to create a system and start the interface.
@@ -24,6 +33,33 @@ public class TrainingPlanner {
 		system.runCMD(args);
 
 	}
+	
+	public TrainingPlanner() {
+		
+		usernameSet = new HashSet<String>();
+		
+		//Read through the names of all the files in the users dir
+		File userDir = new File(USER_DIR);
+		File[] userFiles = userDir.listFiles();
+		
+		for(int i = 0; i < userFiles.length; i++) {
+			
+			if(userFiles[i].isFile()) {
+				
+				String filename = userFiles[i].getName();
+				String ext = filename.substring(filename.length()-USER_EXT.length(), filename.length());
+				String nextUsername = filename.substring(0, filename.length()-USER_EXT.length());
+				
+				//Check the file extension, then add to HashSet
+				if(ext.equals(USER_EXT)) {
+					usernameSet.add(nextUsername);
+				}
+				
+			}
+			
+		}
+		
+	}
 
 	/*
 	 * Reads in a user and provides a commandline interface to access it.
@@ -32,11 +68,83 @@ public class TrainingPlanner {
 	 */
 	private void runCMD(String[] args) {
 		
-		//Read in the current user named in the first command line argument
-		//User currentUser = readUser(args[0]);
-		
 		//Set up a scanner to get input from CMD
 		Scanner input = new Scanner(System.in);
+		
+		//Read in the current user named in the first command line argument
+		//If no user is provided then create a new user
+		User currentUser = null;
+		
+		if(args.length > 0) {
+			
+			currentUser = readUser(args[0]);
+			
+		}
+		
+		if(currentUser == null) {
+			
+			System.out.println("Valid username not provided - create a new user");
+			
+			//Collect the required information for a new user
+			//Get the name
+			System.out.print("Enter a name: ");
+			String name = input.next().trim();
+			
+			//Get the date of birth
+			System.out.print("Enter your date of birth (" + DATE_FORMAT + "): ");
+			boolean dateSuccess = false;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+			LocalDate date = null;
+			
+			while(!dateSuccess) {
+				
+				String text = input.next().trim();
+				
+				try {
+					date = LocalDate.parse(text, formatter);
+					dateSuccess = true;
+				} catch (DateTimeParseException e) {
+					System.out.print("Date error. Please enter date in format (" + DATE_FORMAT + "): ");
+				}
+				
+			}
+			
+			//Get primary sport
+			System.out.print("Enter primary sport: ");
+			String sport = input.next().trim();
+			
+			//Get email			
+			System.out.print("Enter email: ");
+			String email = input.next().trim();
+			
+			//Get username, but also check that the username is not taken and contains only alphanumerics
+			System.out.print("Enter a username: ");
+			boolean usernameSuccess = false;
+			String username = null;
+			
+			while(!usernameSuccess) {
+				
+				username = input.next().trim();
+				if(isValidUsername(username)) {
+					usernameSuccess = true;
+					usernameSet.add(username);
+				} else {
+					System.out.println("Username unavailable. Make sure to use only letters, numbers or underscores (6 to 18 characters).");
+					System.out.print("Please enter another username: ");
+				}
+				
+			}
+			
+			//Create the new User's AccountDetails object
+			AccountDetails userDetails = new AccountDetails(username, name, date, email, sport);
+			
+			//Create the new User
+			currentUser = new User(userDetails);
+			
+			//Save the new User to a file
+			writeUser(currentUser);
+			
+		}
 		
 		boolean shutdown = false;
 		
@@ -44,7 +152,7 @@ public class TrainingPlanner {
 		while(!shutdown) {
 		
 			//Print prompt
-			System.out.print(args[0] + ">>");
+			System.out.print(currentUser.getDetails().getName() + ">>");
 			//Read the next command
 			String nextCommand = input.next().trim();
 			
@@ -140,6 +248,21 @@ public class TrainingPlanner {
 			
 		}
 		
+	}
+
+	private void writeUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private boolean isValidUsername(String username) {
+		boolean isValid = true;
+		
+		if(!username.matches("^(\\w){6,18}$") || usernameSet.contains(username)){
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 
 	private User readUser(String username) {
