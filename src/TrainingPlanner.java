@@ -17,9 +17,9 @@ import java.util.Scanner;
 public class TrainingPlanner {
 	
 	private HashSet<String> usernameSet;
-	private static String DATE_FORMAT = "dd MM yyyy";
-	private static String USER_DIR = "users";
-	private static String USER_EXT = ".tpu";
+	private static final String DATE_FORMAT = "dd MM yyyy";
+	private static final String USER_DIR = "users";
+	private static final String USER_EXT = ".tpu";
 	
 	/*
 	 * A main function to create a system and start the interface.
@@ -38,7 +38,7 @@ public class TrainingPlanner {
 		
 		usernameSet = new HashSet<String>();
 		
-		//Read through the names of all the files in the users dir
+		//Read through the names of all the files in the users dir to get a set of usernames
 		File userDir = new File(USER_DIR);
 		File[] userFiles = userDir.listFiles();
 		
@@ -88,7 +88,7 @@ public class TrainingPlanner {
 			//Collect the required information for a new user
 			//Get the name
 			System.out.print("Enter a name: ");
-			String name = input.next().trim();
+			String name = input.nextLine().trim();
 			
 			//Get the date of birth
 			System.out.print("Enter your date of birth (" + DATE_FORMAT + "): ");
@@ -98,7 +98,7 @@ public class TrainingPlanner {
 			
 			while(!dateSuccess) {
 				
-				String text = input.next().trim();
+				String text = input.nextLine().trim();
 				
 				try {
 					date = LocalDate.parse(text, formatter);
@@ -111,11 +111,11 @@ public class TrainingPlanner {
 			
 			//Get primary sport
 			System.out.print("Enter primary sport: ");
-			String sport = input.next().trim();
+			String sport = input.nextLine().trim();
 			
 			//Get email			
 			System.out.print("Enter email: ");
-			String email = input.next().trim();
+			String email = input.nextLine().trim();
 			
 			//Get username, but also check that the username is not taken and contains only alphanumerics
 			System.out.print("Enter a username: ");
@@ -124,7 +124,8 @@ public class TrainingPlanner {
 			
 			while(!usernameSuccess) {
 				
-				username = input.next().trim();
+				username = input.nextLine().trim();
+				
 				if(isValidUsername(username)) {
 					usernameSuccess = true;
 					usernameSet.add(username);
@@ -154,7 +155,7 @@ public class TrainingPlanner {
 			//Print prompt
 			System.out.print(currentUser.getDetails().getName() + ">>");
 			//Read the next command
-			String nextCommand = input.next().trim();
+			String nextCommand = input.nextLine().trim();
 			
 			if(nextCommand.equals("show-user")) {
 				//Show user details
@@ -231,8 +232,8 @@ public class TrainingPlanner {
 			} else if(nextCommand.equals("exit")) {
 				
 				//Exit
-				System.out.println("Are you sure you wish to exit? (Y/N)");
-				String response = input.next().trim();
+				System.out.print("Are you sure you wish to exit? (Y/N) ");
+				String response = input.nextLine().trim();
 				
 				if(response.toLowerCase().equals("y")) {
 					shutdown = true;
