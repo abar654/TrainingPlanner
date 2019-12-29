@@ -85,6 +85,11 @@ public class AccountDetails {
 	
 	public void addSport(Sport newSport) {
 		sports.add(newSport);
+	}
+
+	public String toJSONStr() {
+		// TODO Auto-generated method stub
+		return jString;
 	}	
 
 }

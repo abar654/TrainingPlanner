@@ -18,4 +18,21 @@ public class User {
 		return details;
 	}
 
+
+	public String toJSONStr() {
+		
+		String returnString = "";
+		
+		//Write the AccountDetails object
+		returnString += details.toJSONStr();
+		
+		//Write the TrainingCalendar object
+		returnString += calendar.toJSONStr();
+		
+		//Write the HealthState object
+		returnString += state.toJSONStr();
+		
+		return returnString;
+	}
+
 }

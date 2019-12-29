@@ -1,4 +1,6 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -252,7 +254,21 @@ public class TrainingPlanner {
 	}
 
 	private void writeUser(User user) {
-		// TODO Auto-generated method stub
+		
+		//Open for writing the file in the users directory which has the name of the user
+		try {
+			
+			FileWriter outputFile = new FileWriter(user.getDetails().getUsername() + USER_EXT);
+			BufferedWriter output = new BufferedWriter(outputFile);
+			
+			output.write(user.toJSONStr());
+			
+			output.close();
+			outputFile.close();
+			
+		} catch(Exception e) {
+			System.out.println("Error writing file: " + e);
+		}
 		
 	}
 
