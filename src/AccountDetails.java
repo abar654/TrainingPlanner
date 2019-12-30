@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+
 /**
  * A class that manages all the account details for a user in the TrainingPlanner
  * @author Andrew
@@ -21,14 +23,14 @@ public class AccountDetails {
 	/*
 	 * Creates a new AccountDetails object containing all the provided information
 	 */
-	public AccountDetails(String username, String name, LocalDate date, String email, String sport) {
+	public AccountDetails(String username, String name, LocalDate date, String email, Sport sport) {
 		
 		this.username = username;
 		this.name = name;
 		this.dob = date;
 		this.email = email;
 		
-		primarySport = new Sport(sport, 0);
+		primarySport = sport;
 		
 		sports = new ArrayList<Sport>();
 		sports.add(primarySport);
@@ -86,5 +88,24 @@ public class AccountDetails {
 	public void addSport(Sport newSport) {
 		sports.add(newSport);
 	}
+
+	/*
+	public static AccountDetails createFromJson(JsonObject detailsJson) {
+		
+		//Extract all the required info from the JsonObject
+
+		String name = detailsJson.get("name").getAsString();
+		
+		JsonObject dateJson = detailsJson.getAsJsonObject("dob");
+		int day = dateJson.get("day").getAsInt();
+		int month = dateJson.get("month").getAsInt();
+		int year = dateJson.get("year").getAsInt();
+		
+		LocalDate date = LocalDate.of(year, month, day);
+		
+		String email = detailsJson.get("email").getAsString();
+		
+	}
+	*/
 
 }

@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,6 +13,10 @@ import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
 /**
  * The main class for the project. This class reads a user in from
@@ -37,7 +42,7 @@ public class TrainingPlanner {
 		
 		//Name of testfile if any
 		//Set to null to input via commandline directly
-		String testfile = "test1-accountcreation";
+		String testfile = null;
 		
 		//Run the commandline interface
 		system.runCMD(args, testfile);
@@ -87,7 +92,7 @@ public class TrainingPlanner {
 			File inputFile = new File(testfile);
 			try {
 				input = new Scanner(inputFile);
-			} catch (FileNotFoundException e) {
+			} catch(FileNotFoundException e) {
 				input = new Scanner(System.in);
 			}
 			
@@ -104,6 +109,7 @@ public class TrainingPlanner {
 		
 		if(args.length > 0) {
 			
+			//readUser should return null if user not found
 			currentUser = readUser(args[0]);
 			
 		}
@@ -138,7 +144,7 @@ public class TrainingPlanner {
 			
 			//Get primary sport
 			System.out.print("Enter primary sport: ");
-			String sport = input.nextLine().trim();
+			Sport sport = new Sport(input.nextLine().trim(), 0);
 			
 			//Get email			
 			System.out.print("Enter email: ");
@@ -186,7 +192,8 @@ public class TrainingPlanner {
 			
 			if(nextCommand.equals("show-user")) {
 				//Show user details
-				System.out.println("Command received: " + nextCommand);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				System.out.println(gson.toJson(currentUser.getDetails()));
 			
 			} else if(nextCommand.equals("add-session")) {
 				//Add a session
@@ -313,8 +320,32 @@ public class TrainingPlanner {
 	}
 
 	private User readUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			
+			//Open the user's file
+			File userfile = new File(USER_DIR + "/" + username + USER_EXT);
+			FileReader userReader = new FileReader(userfile);
+			
+			//Give the input stream to the JSON parser
+			Gson gson = new Gson();
+			JsonReader jsonReader = new JsonReader(userReader);
+			
+			//Read the JSON file into a JSON element
+			JsonObject userJson = (JsonObject) JsonParser.parseReader(jsonReader);
+
+			//Build the User object
+			User user = gson.fromJson(userJson, User.class);
+			
+			return user;
+			
+		} catch(FileNotFoundException e) {
+			
+			return null;
+						
+		}
+		
+		
 	}
 
 }
