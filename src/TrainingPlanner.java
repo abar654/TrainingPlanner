@@ -1,5 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,6 +9,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * The main class for the project. This class reads a user in from
@@ -31,8 +35,12 @@ public class TrainingPlanner {
 		//Create a training planner object to work with
 		TrainingPlanner system = new TrainingPlanner();
 		
+		//Name of testfile if any
+		//Set to null to input via commandline directly
+		String testfile = "test1-accountcreation";
+		
 		//Run the commandline interface
-		system.runCMD(args);
+		system.runCMD(args, testfile);
 
 	}
 	
@@ -68,10 +76,27 @@ public class TrainingPlanner {
 	 * The user to be read is provided as the first command line argument.
 	 * If no user is provided then a new user can be created.
 	 */
-	private void runCMD(String[] args) {
+	private void runCMD(String[] args, String testfile) {
 		
-		//Set up a scanner to get input from CMD
-		Scanner input = new Scanner(System.in);
+		//Set up the input
+		Scanner input;
+		
+		if(testfile != null) {
+			
+			//Set up the scanner to get input from test file
+			File inputFile = new File(testfile);
+			try {
+				input = new Scanner(inputFile);
+			} catch (FileNotFoundException e) {
+				input = new Scanner(System.in);
+			}
+			
+		} else {
+		
+			//Set up a scanner to get input from CMD
+			input = new Scanner(System.in);
+			
+		}
 		
 		//Read in the current user named in the first command line argument
 		//If no user is provided then create a new user
@@ -239,6 +264,7 @@ public class TrainingPlanner {
 				
 				if(response.toLowerCase().equals("y")) {
 					shutdown = true;
+					input.close();
 				}
 				
 			} else {
@@ -258,10 +284,14 @@ public class TrainingPlanner {
 		//Open for writing the file in the users directory which has the name of the user
 		try {
 			
-			FileWriter outputFile = new FileWriter(user.getDetails().getUsername() + USER_EXT);
+			FileWriter outputFile = new FileWriter(USER_DIR + "/" + user.getDetails().getUsername() + USER_EXT);
 			BufferedWriter output = new BufferedWriter(outputFile);
 			
-			output.write(user.toJSONStr());
+			//Create a GSON object to serialise
+			//NOTE: The Condition class (part of HealthState) will need a custom serialiser
+			//as it contains references to Sessions and we only want to store session IDs not the whole objects again.
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			output.write(gson.toJson(user));
 			
 			output.close();
 			outputFile.close();

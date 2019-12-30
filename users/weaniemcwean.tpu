@@ -1,0 +1,19 @@
+{
+  "details": {
+    "username": "weaniemcwean",
+    "name": "Ewan",
+    "dob": {
+      "year": 1993,
+      "month": 11,
+      "day": 20
+    },
+    "email": "weanie@wean.com",
+    "primarySport": {},
+    "sports": [
+      {}
+    ],
+    "nextSessionId": 0
+  },
+  "calendar": {},
+  "state": {}
+}
