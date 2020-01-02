@@ -21,4 +21,9 @@ public class User {
 		return details;
 	}
 
+
+	public void addSession(Session newSession) {
+		calendar.addSession(newSession);
+	}
+
 }

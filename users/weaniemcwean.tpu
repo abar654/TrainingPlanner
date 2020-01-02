@@ -8,12 +8,93 @@
       "day": 20
     },
     "email": "weanie@wean.com",
-    "primarySport": {},
+    "primarySport": {
+      "color": {
+        "value": -16777216,
+        "falpha": 0.0
+      },
+      "name": "Lifting",
+      "sessionTypes": [
+        "Chest"
+      ]
+    },
     "sports": [
-      {}
+      {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "name": "Lifting",
+        "sessionTypes": [
+          "Chest"
+        ]
+      },
+      {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "name": "Running",
+        "sessionTypes": [
+          "Long"
+        ]
+      }
     ],
-    "nextSessionId": 0
+    "nextSessionId": 2
   },
-  "calendar": {},
+  "calendar": {
+    "sessions": [
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Lifting",
+          "sessionTypes": [
+            "Chest"
+          ]
+        },
+        "sessionType": "Chest",
+        "distance": 0.0,
+        "duration": 30,
+        "intensity": 5,
+        "comment": "Massive gains bruh!",
+        "completed": true,
+        "id": 0,
+        "reports": [],
+        "date": {
+          "year": 2020,
+          "month": 1,
+          "day": 1
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Long"
+          ]
+        },
+        "sessionType": "Long",
+        "distance": 42.0,
+        "duration": 120,
+        "intensity": 10,
+        "comment": "No pain no gain.",
+        "completed": false,
+        "id": 1,
+        "reports": [],
+        "date": {
+          "year": 2020,
+          "month": 1,
+          "day": 2
+        }
+      }
+    ]
+  },
   "state": {}
 }

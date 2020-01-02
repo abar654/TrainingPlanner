@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +43,8 @@ public class TrainingPlanner {
 		
 		//Name of testfile if any
 		//Set to null to input via commandline directly
-		String testfile = null;
+		String testfile = "test1-accountcreation";
+		//String testfile = null;
 		
 		//Run the commandline interface
 		system.runCMD(args, testfile);
@@ -144,7 +146,7 @@ public class TrainingPlanner {
 			
 			//Get primary sport
 			System.out.print("Enter primary sport: ");
-			Sport sport = new Sport(input.nextLine().trim(), 0);
+			Sport sport = new Sport(input.nextLine().trim(), new Color(0));
 			
 			//Get email			
 			System.out.print("Enter email: ");
@@ -196,12 +198,177 @@ public class TrainingPlanner {
 				System.out.println(gson.toJson(currentUser.getDetails()));
 			
 			} else if(nextCommand.equals("add-session")) {
+				
 				//Add a session
-				System.out.println("Command received: " + nextCommand);
+				
+				//Get all the information to create the session
+				
+				//Get the date
+				System.out.print("Date for this session: ");
+				boolean dateSuccess = false;
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+				LocalDate date = null;
+				
+				while(!dateSuccess) {
+					
+					String text = input.nextLine().trim();
+					
+					try {
+						date = LocalDate.parse(text, formatter);
+						dateSuccess = true;
+					} catch (DateTimeParseException e) {
+						System.out.print("Date error. Please enter date in format (" + DATE_FORMAT + "): ");
+					}
+					
+				}
+								
+				//Get the Sport (if it is a new sport then check that the user wants to create)
+				Sport nextSport = null;
+				
+				while(nextSport == null) {
+					
+					System.out.print("Sport type for this session: ");
+					String sportName = input.nextLine().trim();
+					
+					for(Sport currentSport: currentUser.getDetails().getSports()) {
+						if(currentSport.getName().equals(sportName)) {
+							nextSport = currentSport;
+							break;
+						}
+					}
+					
+					if(nextSport == null) {
+						
+						//Ask the user if they want to create a new sport
+						System.out.print("Create new sport with name '" + sportName + "' (y/n)? ");
+						String response = input.nextLine().trim();
+						
+						if(response.toLowerCase().equals("y")) {
+							
+							//Create a new sport and add it to the user
+							nextSport = new Sport(sportName, new Color(0));
+							currentUser.getDetails().addSport(nextSport);
+
+						}
+						
+					}
+					
+				}
+				
+				//Get the SessionType
+				System.out.print("Session type for this session: ");
+				String typeName = input.nextLine().trim();
+				
+				//If this sessionType doesn't exist for the Sport then add it to the Sport's sessiontypes
+				boolean typeExists = false;
+				
+				for(String existingType: nextSport.getSessionTypes()) {
+					if(existingType.equals(typeName)) {
+						typeExists = true;
+						break;
+					}
+				}
+				
+				if(!typeExists) {
+					nextSport.addSessionType(typeName);
+				}
+				
+				//Get distance (0 for stationary)
+				System.out.print("Distance for this session in km (enter 0 if stationary session): ");
+				double distance = -1;
+				
+				while(distance < 0) {
+					
+					String distanceInput = input.nextLine().trim();
+					
+					try {
+						
+						//Parse distance and round to 2 dp
+						distance = Math.floor(Double.parseDouble(distanceInput)*100 + 0.5)/100;
+						if(distance < 0 || distance > 2000) {
+							System.out.print("Distance must be positive number in km (less than 2000): ");
+							distance = -1;
+						}
+						
+					} catch(NumberFormatException e) {
+						System.out.print("Please enter a number: ");
+					}
+					
+				}		
+				
+				//Get duration (in minutes)
+				System.out.print("Duration for this session in minutes: ");
+				int duration = -1;
+				
+				while(duration < 0) {
+					
+					String durationInput = input.nextLine().trim();
+					
+					try {
+						
+						//Parse duration (round to nearest minute)
+						duration = (int) Math.floor(Double.parseDouble(durationInput) + 0.5);
+						if(duration < 0 || duration > 60*24) {
+							System.out.print("Duration must be positive number in minutes: ");
+							duration = -1;
+						}
+						
+					} catch(NumberFormatException e) {
+						System.out.print("Please enter a number: ");
+					}
+					
+				}	
+				
+				//Get intensity (from 1 to 10)
+				System.out.print("Intensity for this session in (RPE scale 1 to 10): ");
+				int intensity = -1;
+				
+				while(intensity < 0) {
+					
+					String intensityInput = input.nextLine().trim();
+					
+					try {
+						
+						//Parse intensity
+						intensity = Integer.parseInt(intensityInput);
+						if(intensity < 1 || intensity > 10) {
+							System.out.print("Intensity must be an integer between 1 and 10 (inclusive): ");
+							intensity = -1;
+						}
+						
+					} catch(NumberFormatException e) {
+						System.out.print("Please enter a number: ");
+					}
+					
+				}	
+				
+				//Get comment (max 1000 chars)
+				System.out.print("Comment for this session (max 1000 characters): ");
+				String comment = input.nextLine().trim();
+				if(comment.length() > 1000) {
+					comment = comment.substring(0, 1000);
+				}
+				
+				//Get completed flag (y/n)
+				System.out.print("Is this session completed (y/n)? ");
+				String response = input.nextLine().trim();
+				boolean completed = false;
+				
+				if(response.toLowerCase().equals("y")) {
+					completed = true;
+				}
+				
+				//Make a new session
+				Session newSession = new Session(date, nextSport, typeName, distance, duration, 
+						intensity, comment, completed, currentUser.getDetails().giveNextSessionId());
+				
+				//Add it to the current user
+				currentUser.addSession(newSession);
 				
 			} else if(nextCommand.equals("add-condition")) {
 				
 				//Add a condition
+				//To be implemented in Stage 3
 				System.out.println("Command received: " + nextCommand);
 				
 			} else if(nextCommand.equals("remove-session")) {
@@ -242,7 +409,7 @@ public class TrainingPlanner {
 			} else if(nextCommand.equals("save")) {
 				
 				//Saves current user state to file.
-				System.out.println("Command received: " + nextCommand);
+				writeUser(currentUser);
 				
 			} else if(nextCommand.equals("help")) {
 				

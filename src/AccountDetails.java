@@ -57,12 +57,18 @@ public class AccountDetails {
 		return primarySport;
 	}
 	
+	public long getNextSessionId() {
+		return nextSessionId;
+	}
+	
 	/*
 	 * Returns a shallow copy of the sports list
 	 */
 	public ArrayList<Sport> getSports() {
 		ArrayList<Sport> copy = new ArrayList<Sport>();
-		copy.addAll(sports);
+		if(!sports.isEmpty()) {
+			copy.addAll(sports);
+		}
 		return copy;
 	}
 	
@@ -87,6 +93,12 @@ public class AccountDetails {
 	
 	public void addSport(Sport newSport) {
 		sports.add(newSport);
+	}
+	
+	public long giveNextSessionId() {
+		long toGive = nextSessionId;
+		nextSessionId++;
+		return toGive;
 	}
 
 	/*
