@@ -43,8 +43,8 @@ public class TrainingPlanner {
 		
 		//Name of testfile if any
 		//Set to null to input via commandline directly
-		String testfile = "test1-accountcreation";
-		//String testfile = null;
+		//String testfile = "test1-accountcreation";
+		String testfile = null;
 		
 		//Run the commandline interface
 		system.runCMD(args, testfile);
@@ -104,6 +104,9 @@ public class TrainingPlanner {
 			input = new Scanner(System.in);
 			
 		}
+		
+		//Set the focus date to right now
+		LocalDate focusDate = LocalDate.now();
 		
 		//Read in the current user named in the first command line argument
 		//If no user is provided then create a new user
@@ -374,17 +377,60 @@ public class TrainingPlanner {
 			} else if(nextCommand.equals("remove-session")) {
 				
 				//Remove a session
-				System.out.println("Command received: " + nextCommand);
+				//Get the sessionId from the user
+				System.out.print("Enter the session id for the session you would like to remove: ");
+				long sessionId = -1;
+				
+				while(sessionId < 0) {
+					
+					String idInput = input.nextLine().trim();
+					
+					try {
+						sessionId = Long.parseLong(idInput);
+					} catch(NumberFormatException e) {
+						System.out.print("Please enter a number: ");
+					}
+					
+				}
+				
+				//Get the session to be removed
+				Session toRemove = currentUser.getSessionById(sessionId);
+				
+				//Call the remove function on the user
+				//Check that this session existed
+				//getSessionById() should return null if it did not
+				if(toRemove != null) {
+					currentUser.removeSession(toRemove);
+					System.out.println("Session " + sessionId + " removed.");
+				} else {
+					System.out.println("Session not found.");
+				}
 				
 			} else if(nextCommand.equals("remove-condition")) {
 				
 				//Remove a condition
+				//To be implemented in Stage 3
 				System.out.println("Command received: " + nextCommand);
 				
 			} else if(nextCommand.equals("set-date")) {
 				
 				//Set focus date
-				System.out.println("Command received: " + nextCommand);
+				System.out.print("Enter a date during the week you would like to show: ");
+				boolean dateSuccess = false;
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+				
+				while(!dateSuccess) {
+					
+					String text = input.nextLine().trim();
+					
+					try {
+						focusDate = LocalDate.parse(text, formatter);
+						dateSuccess = true;
+					} catch (DateTimeParseException e) {
+						System.out.print("Date error. Please enter date in format (" + DATE_FORMAT + "): ");
+					}
+					
+				}
 				
 			} else if(nextCommand.equals("show-sessions")) {
 				
@@ -399,17 +445,20 @@ public class TrainingPlanner {
 			} else if(nextCommand.equals("show-conditions")) {
 				
 				//Show conditions for current training week
+				//To be implemented in stage 3
 				System.out.println("Command received: " + nextCommand);
 				
 			} else if(nextCommand.equals("show-recommendations")) {
 				
 				//Show recommendations based on current training week
+				//To be implemented in stage 4
 				System.out.println("Command received: " + nextCommand);
 				
 			} else if(nextCommand.equals("save")) {
 				
 				//Saves current user state to file.
 				writeUser(currentUser);
+				System.out.println("User saved.");
 				
 			} else if(nextCommand.equals("help")) {
 				

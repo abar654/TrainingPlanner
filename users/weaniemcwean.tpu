@@ -36,11 +36,12 @@
         },
         "name": "Running",
         "sessionTypes": [
-          "Long"
+          "Long",
+          "y"
         ]
       }
     ],
-    "nextSessionId": 2
+    "nextSessionId": 4
   },
   "calendar": {
     "sessions": [
@@ -92,6 +93,31 @@
           "year": 2020,
           "month": 1,
           "day": 2
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Lifting",
+          "sessionTypes": [
+            "Chest"
+          ]
+        },
+        "sessionType": "Chest",
+        "distance": 0.0,
+        "duration": 30,
+        "intensity": 5,
+        "comment": "Massive gains bruh!",
+        "completed": true,
+        "id": 2,
+        "reports": [],
+        "date": {
+          "year": 2020,
+          "month": 1,
+          "day": 1
         }
       }
     ]

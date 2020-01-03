@@ -26,4 +26,14 @@ public class User {
 		calendar.addSession(newSession);
 	}
 
+
+	public void removeSession(Session toRemove) {
+		calendar.removeSession(toRemove);		
+	}
+
+
+	public Session getSessionById(long sessionId) {
+		return calendar.getSessionById(sessionId);
+	}
+
 }
