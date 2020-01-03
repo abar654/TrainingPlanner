@@ -46,6 +46,10 @@ public class Session {
 		return distance;
 	}
 	
+	public int getDuration() {
+		return duration;
+	}
+	
 	public int getIntensity() {
 		return intensity;
 	}
@@ -60,6 +64,10 @@ public class Session {
 	
 	public int getLoad() {
 		return duration * intensity;
+	}
+	
+	public LocalDate getDate() {
+		return date;
 	}
 	
 	/*
@@ -113,6 +121,10 @@ public class Session {
 	
 	public void setCompleted(boolean newCompleted) {
 		completed = newCompleted;
+	}
+	
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	public void addReport(ConditionReport toAdd) {

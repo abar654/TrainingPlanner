@@ -1,4 +1,5 @@
 import java.io.File;
+import java.time.LocalDate;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +35,11 @@ public class User {
 
 	public Session getSessionById(long sessionId) {
 		return calendar.getSessionById(sessionId);
+	}
+
+
+	public TrainingWeek getTrainingWeek(LocalDate focusDate) {
+		return calendar.getTrainingWeek(focusDate);	
 	}
 
 }

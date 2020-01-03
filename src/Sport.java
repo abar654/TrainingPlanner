@@ -45,5 +45,10 @@ public class Sport {
 		}
 		return copy;
 	}
+	
+	public boolean equals(Object other) {
+		return;
+		
+	}
 
 }

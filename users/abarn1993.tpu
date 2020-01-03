@@ -1,0 +1,357 @@
+{
+  "details": {
+    "username": "abarn1993",
+    "name": "Andrew",
+    "dob": {
+      "year": 1993,
+      "month": 11,
+      "day": 21
+    },
+    "email": "abarn@wean.com",
+    "primarySport": {
+      "color": {
+        "value": -16777216,
+        "falpha": 0.0
+      },
+      "name": "Running",
+      "sessionTypes": [
+        "Easy",
+        "Long",
+        "Intervals"
+      ]
+    },
+    "sports": [
+      {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "name": "Running",
+        "sessionTypes": [
+          "Easy",
+          "Long",
+          "Intervals"
+        ]
+      },
+      {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "name": "Strength",
+        "sessionTypes": [
+          "Core",
+          "Legs"
+        ]
+      },
+      {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "name": "Pool Running",
+        "sessionTypes": [
+          "Intervals"
+        ]
+      }
+    ],
+    "nextSessionId": 11
+  },
+  "calendar": {
+    "sessions": [
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Easy",
+        "distance": 5.0,
+        "duration": 25,
+        "intensity": 4,
+        "comment": "Easy plod.",
+        "completed": true,
+        "id": 0,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 1
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Long",
+        "distance": 25.0,
+        "duration": 100,
+        "intensity": 5,
+        "comment": "Good session, maintained solid pace",
+        "completed": true,
+        "id": 1,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 2
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Strength",
+          "sessionTypes": [
+            "Core",
+            "Legs"
+          ]
+        },
+        "sessionType": "Core",
+        "distance": 0.0,
+        "duration": 20,
+        "intensity": 4,
+        "comment": "The usual ab sesh",
+        "completed": true,
+        "id": 2,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 8
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Intervals",
+        "distance": 6.0,
+        "duration": 30,
+        "intensity": 7,
+        "comment": "Long fartlek, feeling good…",
+        "completed": true,
+        "id": 3,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 11
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Long",
+        "distance": 16.0,
+        "duration": 65,
+        "intensity": 5,
+        "comment": "Felt ok",
+        "completed": true,
+        "id": 4,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 16
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Strength",
+          "sessionTypes": [
+            "Core",
+            "Legs"
+          ]
+        },
+        "sessionType": "Legs",
+        "distance": 0.0,
+        "duration": 30,
+        "intensity": 3,
+        "comment": "Physio exercises",
+        "completed": true,
+        "id": 5,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 20
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Easy",
+        "distance": 8.0,
+        "duration": 40,
+        "intensity": 4,
+        "comment": "Cruising.",
+        "completed": true,
+        "id": 6,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 22
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Pool Running",
+          "sessionTypes": [
+            "Intervals"
+          ]
+        },
+        "sessionType": "Intervals",
+        "distance": 0.0,
+        "duration": 30,
+        "intensity": 5,
+        "comment": "Good sesh, feeling a niggle",
+        "completed": true,
+        "id": 7,
+        "reports": [],
+        "date": {
+          "year": 2019,
+          "month": 12,
+          "day": 27
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Easy",
+        "distance": 6.0,
+        "duration": 30,
+        "intensity": 4,
+        "comment": "Testing the knee.",
+        "completed": true,
+        "id": 8,
+        "reports": [],
+        "date": {
+          "year": 2020,
+          "month": 1,
+          "day": 1
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Strength",
+          "sessionTypes": [
+            "Core",
+            "Legs"
+          ]
+        },
+        "sessionType": "Core",
+        "distance": 0.0,
+        "duration": 20,
+        "intensity": 4,
+        "comment": "the usual",
+        "completed": true,
+        "id": 9,
+        "reports": [],
+        "date": {
+          "year": 2020,
+          "month": 1,
+          "day": 3
+        }
+      },
+      {
+        "sport": {
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Running",
+          "sessionTypes": [
+            "Easy",
+            "Long",
+            "Intervals"
+          ]
+        },
+        "sessionType": "Long",
+        "distance": 14.0,
+        "duration": 55,
+        "intensity": 5,
+        "comment": "Take it easy",
+        "completed": false,
+        "id": 10,
+        "reports": [],
+        "date": {
+          "year": 2020,
+          "month": 1,
+          "day": 5
+        }
+      }
+    ]
+  },
+  "state": {}
+}

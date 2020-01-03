@@ -43,7 +43,7 @@ public class TrainingPlanner {
 		
 		//Name of testfile if any
 		//Set to null to input via commandline directly
-		//String testfile = "test1-accountcreation";
+		//String testfile = "test2-weekdata";
 		String testfile = null;
 		
 		//Run the commandline interface
@@ -196,6 +196,7 @@ public class TrainingPlanner {
 			String nextCommand = input.nextLine().trim();
 			
 			if(nextCommand.equals("show-user")) {
+				
 				//Show user details
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 				System.out.println(gson.toJson(currentUser.getDetails()));
@@ -435,12 +436,46 @@ public class TrainingPlanner {
 			} else if(nextCommand.equals("show-sessions")) {
 				
 				//Show current training week sessions
-				System.out.println("Command received: " + nextCommand);
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				System.out.println(gson.toJson(currentUser.getTrainingWeek(focusDate)));
 				
 			} else if(nextCommand.equals("show-data")) {
 				
 				//Show current training week data
-				System.out.println("Command received: " + nextCommand);
+				//Get the data for the week in focus
+				TrainingWeek week = currentUser.getTrainingWeek(focusDate);
+				
+				//Print out the different pieces of data
+				
+				//Start date
+				LocalDate startDate = week.getStartDate();
+				System.out.println("Data for week starting: " + startDate.getDayOfMonth()
+						+ " " + startDate.getMonthValue() + " " + startDate.getYear());
+				
+				//Chronic load
+				System.out.println("Chronic load: " + week.getChronicLoad());
+				
+				//Previous acute loads
+				int[] prevLoads = week.getPrevAcuteLoads();
+				System.out.println("Previous acute loads: " + prevLoads[0] + " " +
+						prevLoads[1] + " " + prevLoads[2] + " " + prevLoads[3]);
+				
+				//Acute load
+				System.out.println("Current acute load: " + week.getAcuteLoad());
+				
+				//Week distance
+				System.out.println("Primary sport distance: " 
+				+ week.getWeekDistance(currentUser.getDetails().getPrimarySport()));
+				
+				//Week time
+				System.out.println("Training time: " + week.getWeekTime());
+				
+				//ACWR
+				System.out.println("Acute:Chronic Workload Ratio: " + week.getACWR());
+				
+				//ACWR Status
+				System.out.println("Current ACWR status: " + week.getACWRStatus());
+
 				
 			} else if(nextCommand.equals("show-conditions")) {
 				
@@ -560,7 +595,6 @@ public class TrainingPlanner {
 			return null;
 						
 		}
-		
 		
 	}
 
