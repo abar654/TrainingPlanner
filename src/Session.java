@@ -11,7 +11,7 @@ public class Session {
 	private String comment; //max 1000 chars
 	private boolean completed;
 	private long id;
-	private ArrayList<ConditionReport> reports;
+	private ArrayList<Long> reportIds;
 	private LocalDate date;
 
 	public Session(LocalDate date, Sport sport, String sessionType, double distance, int duration, int intensity, String comment,
@@ -26,7 +26,7 @@ public class Session {
 		this.comment = comment;
 		this.completed = completed;
 		this.id = id;
-		reports = new ArrayList<ConditionReport>();
+		reportIds = new ArrayList<Long>();
 
 	}
 	
@@ -73,10 +73,10 @@ public class Session {
 	/*
 	 * Returns a shallow copy of the reports
 	 */
-	public ArrayList<ConditionReport> getReports() {
-		ArrayList<ConditionReport> copy = new ArrayList<ConditionReport>();
-		if(!reports.isEmpty()) {
-			copy.addAll(reports);
+	public ArrayList<Long> getReports() {
+		ArrayList<Long> copy = new ArrayList<Long>();
+		if(!reportIds.isEmpty()) {
+			copy.addAll(reportIds);
 		}
 		return copy;
 	}
@@ -127,12 +127,12 @@ public class Session {
 		this.date = date;
 	}
 	
-	public void addReport(ConditionReport toAdd) {
-		reports.add(toAdd);
+	public void addReport(long reportId) {
+		reportIds.add(reportId);
 	}
 	
-	public void removeReport(ConditionReport toRemove) {
-		reports.remove(toRemove);
+	public void removeReport(long reportId) {
+		reportIds.remove(reportId);
 	}
 
 }

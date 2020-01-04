@@ -1,8 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import com.google.gson.JsonObject;
-
 /**
  * A class that manages all the account details for a user in the TrainingPlanner
  * @author Andrew
@@ -100,24 +98,5 @@ public class AccountDetails {
 		nextSessionId++;
 		return toGive;
 	}
-
-	/*
-	public static AccountDetails createFromJson(JsonObject detailsJson) {
-		
-		//Extract all the required info from the JsonObject
-
-		String name = detailsJson.get("name").getAsString();
-		
-		JsonObject dateJson = detailsJson.getAsJsonObject("dob");
-		int day = dateJson.get("day").getAsInt();
-		int month = dateJson.get("month").getAsInt();
-		int year = dateJson.get("year").getAsInt();
-		
-		LocalDate date = LocalDate.of(year, month, day);
-		
-		String email = detailsJson.get("email").getAsString();
-		
-	}
-	*/
 
 }
