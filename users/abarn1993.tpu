@@ -53,9 +53,19 @@
         "sessionTypes": [
           "Intervals"
         ]
+      },
+      {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "name": "Climbing",
+        "sessionTypes": [
+          "Gym"
+        ]
       }
     ],
-    "nextSessionId": 11
+    "nextSessionId": 12
   },
   "calendar": {
     "sessions": [
@@ -79,7 +89,7 @@
         "comment": "Easy plod.",
         "completed": true,
         "id": 0,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -106,7 +116,7 @@
         "comment": "Good session, maintained solid pace",
         "completed": true,
         "id": 1,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -132,7 +142,7 @@
         "comment": "The usual ab sesh",
         "completed": true,
         "id": 2,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -159,7 +169,7 @@
         "comment": "Long fartlek, feeling good…",
         "completed": true,
         "id": 3,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -186,7 +196,7 @@
         "comment": "Felt ok",
         "completed": true,
         "id": 4,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -212,7 +222,7 @@
         "comment": "Physio exercises",
         "completed": true,
         "id": 5,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -239,7 +249,7 @@
         "comment": "Cruising.",
         "completed": true,
         "id": 6,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -264,7 +274,7 @@
         "comment": "Good sesh, feeling a niggle",
         "completed": true,
         "id": 7,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2019,
           "month": 12,
@@ -291,7 +301,7 @@
         "comment": "Testing the knee.",
         "completed": true,
         "id": 8,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2020,
           "month": 1,
@@ -317,7 +327,7 @@
         "comment": "the usual",
         "completed": true,
         "id": 9,
-        "reports": [],
+        "reportIds": [],
         "date": {
           "year": 2020,
           "month": 1,
@@ -330,25 +340,23 @@
             "value": -16777216,
             "falpha": 0.0
           },
-          "name": "Running",
+          "name": "Climbing",
           "sessionTypes": [
-            "Easy",
-            "Long",
-            "Intervals"
+            "Gym"
           ]
         },
-        "sessionType": "Long",
-        "distance": 14.0,
-        "duration": 55,
-        "intensity": 5,
-        "comment": "Take it easy",
-        "completed": false,
-        "id": 10,
-        "reports": [],
+        "sessionType": "Gym",
+        "distance": 0.0,
+        "duration": 90,
+        "intensity": 3,
+        "comment": "Fun times, lots of good new problems. Sore big toe from small shoes.",
+        "completed": true,
+        "id": 11,
+        "reportIds": [],
         "date": {
           "year": 2020,
           "month": 1,
-          "day": 5
+          "day": 4
         }
       }
     ]
