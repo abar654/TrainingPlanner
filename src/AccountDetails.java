@@ -16,7 +16,8 @@ public class AccountDetails {
 	private Sport primarySport;
 	private ArrayList<Sport> sports; //Note that sessionTypes are now stored within each sport
 	private long nextSessionId;
-	
+	private long nextReportId;
+	private long nextConditionId;
 
 	/*
 	 * Creates a new AccountDetails object containing all the provided information
@@ -32,6 +33,10 @@ public class AccountDetails {
 		
 		sports = new ArrayList<Sport>();
 		sports.add(primarySport);
+		
+		nextSessionId = 0;
+		nextReportId = 0;
+		nextConditionId = 0;
 		
 	}
 	
@@ -96,6 +101,18 @@ public class AccountDetails {
 	public long giveNextSessionId() {
 		long toGive = nextSessionId;
 		nextSessionId++;
+		return toGive;
+	}
+
+	public long giveNextReportId() {
+		long toGive = nextReportId;
+		nextReportId++;
+		return toGive;
+	}
+	
+	public long giveNextConditionId() {
+		long toGive = nextConditionId;
+		nextConditionId++;
 		return toGive;
 	}
 

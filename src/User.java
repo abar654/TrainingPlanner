@@ -54,4 +54,24 @@ public class User {
 		return Recommendation.makeRecommendations(getTrainingWeek(focusDate), getConditions(focusDate));
 	}
 
+	public HealthReport getReportById(long reportId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeReport(HealthReport toRemove) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public HealthCondition getConditionById(long conditionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addReport(HealthReport toAdd) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

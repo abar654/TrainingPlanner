@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -107,8 +108,12 @@ public class CommandLineInterface {
 			} else if(nextCommand.equals("add-condition")) {
 				
 				//Add a condition
-				//To be implemented in Stage 3
-				System.out.println("Command received: " + nextCommand);
+				addCondition(currentUser);
+				
+			} else if(nextCommand.equals("add-report")) {
+				
+				//Add a HealthReport
+				addReport(currentUser);
 				
 			} else if(nextCommand.equals("remove-session")) {
 				
@@ -118,8 +123,12 @@ public class CommandLineInterface {
 			} else if(nextCommand.equals("remove-condition")) {
 				
 				//Remove a condition
-				//To be implemented in Stage 3
-				System.out.println("Command received: " + nextCommand);
+				removeCondition(currentUser);
+				
+			} else if(nextCommand.equals("remove-report")) {
+				
+				//Remove a health report
+				removeReport(currentUser);
 				
 			} else if(nextCommand.equals("set-date")) {
 				
@@ -139,8 +148,7 @@ public class CommandLineInterface {
 			} else if(nextCommand.equals("show-conditions")) {
 				
 				//Show conditions for current training week
-				//To be implemented in stage 3
-				System.out.println("Command received: " + nextCommand);
+				showConditions(currentUser, focusDate);
 				
 			} else if(nextCommand.equals("show-recommendations")) {
 				
@@ -167,8 +175,10 @@ public class CommandLineInterface {
 								+ "show-recommendations: Show recommendations based on current training week\n"
 								+ "add-session: Add a session\n"
 								+ "add-condition: Add a condition\n"
+								+ "add-report: Add a health report\n"
 								+ "remove-session: Remove a session\n"
 								+ "remove-condition: Remove a condition\n"
+								+ "remove-report: Remove a health report\n"
 								+ "save: Saves current user state to file\n"
 								+ "help: Show this list of commands\n"
 								+ "exit: Shut down the program\n");
@@ -193,6 +203,17 @@ public class CommandLineInterface {
 			}
 			
 		}
+		
+	}
+
+	private void showConditions(User currentUser, LocalDate focusDate) {
+
+		//Get conditions from the user for the week of focusDate.
+		//This will return conditions that will currently be active
+		//at the end of the week in which focusDate lies.
+		//Print out using GSON.
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		System.out.println(gson.toJson(currentUser.getConditions(focusDate)));
 		
 	}
 
@@ -237,6 +258,13 @@ public class CommandLineInterface {
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		System.out.println(gson.toJson(currentUser.getTrainingWeek(focusDate)));
+		
+	}
+	
+	private void showUser(User currentUser) {
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		System.out.println(gson.toJson(currentUser.getDetails()));
 		
 	}
 
@@ -294,6 +322,72 @@ public class CommandLineInterface {
 			System.out.println("Session " + sessionId + " removed.");
 		} else {
 			System.out.println("Session not found.");
+		}
+		
+	}
+	
+	private void removeReport(User currentUser) {
+
+		//Get the reportId from the user
+		System.out.print("Enter the report id for the report you would like to remove: ");
+		long reportId = -1;
+		
+		while(reportId < 0) {
+			
+			String idInput = input.nextLine().trim();
+			
+			try {
+				reportId = Long.parseLong(idInput);
+			} catch(NumberFormatException e) {
+				System.out.print("Please enter a number: ");
+			}
+			
+		}
+		
+		//Get the report to be removed
+		HealthReport toRemove = currentUser.getReportById(reportId);
+		
+		//Call the remove function on the user
+		//Check that this session existed
+		//getSessionById() should return null if it did not
+		if(toRemove != null) {
+			currentUser.removeReport(toRemove);
+			System.out.println("Report " + reportId + " removed.");
+		} else {
+			System.out.println("Report not found.");
+		}
+		
+	}
+
+	private void removeCondition(User currentUser) {
+		
+		//Get the conditionId from the user
+		System.out.print("Enter the condition id for the report you would like to remove: ");
+		long conditionId = -1;
+		
+		while(conditionId < 0) {
+			
+			String idInput = input.nextLine().trim();
+			
+			try {
+				conditionId = Long.parseLong(idInput);
+			} catch(NumberFormatException e) {
+				System.out.print("Please enter a number: ");
+			}
+			
+		}
+		
+		//Get the report to be removed
+		HealthCondition toRemove = currentUser.getConditionById(conditionId);
+		
+		//Call the remove function on the user
+		//Check that this session existed
+		//getSessionById() should return null if it did not
+		if(toRemove != null) {
+			currentUser.removeCondition(toRemove);
+			System.out.println("Condition " + conditionId + " removed.");
+		} else {
+			System.out.println("Condition not found.");
 		}
 		
 	}
@@ -466,10 +560,167 @@ public class CommandLineInterface {
 		
 	}
 
-	private void showUser(User currentUser) {
+	private void addReport(User currentUser) {
+		
+		//Collect all the information to add to the report
+		
+		//ConditionId
+		System.out.print("Enter the condition id for the condition associated with this report: ");
+		long conditionId = -1;
+		
+		while(conditionId < 0) {
+			
+			String idInput = input.nextLine().trim();
+			
+			try {
+				conditionId = Long.parseLong(idInput);
+			} catch(NumberFormatException e) {
+				System.out.print("Please enter a number: ");
+			}
+			
+		}
+		
+		//VAS Rating - 1 to 10 (1 being best, 10 being worst)
+		System.out.print("Rate the status of your condition on a scale of 1 to 10 (10 being the worst): ");
+		int rating = -1;
+		
+		while(rating < 0) {
+			
+			String ratingInput = input.nextLine().trim();
+			
+			try {
+				
+				//Parse rating
+				rating = Integer.parseInt(ratingInput);
+				if(rating < 1 || rating > 10) {
+					System.out.print("Rating must be an integer between 1 and 10 (inclusive): ");
+					rating = -1;
+				}
+				
+			} catch(NumberFormatException e) {
+				System.out.print("Please enter a number: ");
+			}
+			
+		}
+		
+		//Get comment (max 2000 chars)
+		System.out.print("Comment on the status of your condition (max 2000 characters): ");
+		String comment = input.nextLine().trim();
+		if(comment.length() > 2000) {
+			comment = comment.substring(0, 2000);
+		}
+		
+		//Get seriousness
+		System.out.print("Is the condition serious (y/n)? ");
+		String response = input.nextLine().trim();
+		boolean serious = false;
+		
+		if(response.toLowerCase().equals("y")) {
+			serious = true;
+		}
+		
+		//Get the sessionId to relate it to
+		System.out.print("Enter the session id for the session associated with this report: ");
+		long sessionId = -1;
+		
+		while(sessionId < 0) {
+			
+			String idInput = input.nextLine().trim();
+			
+			try {
+				sessionId = Long.parseLong(idInput);
+			} catch(NumberFormatException e) {
+				System.out.print("Please enter a number: ");
+			}
+			
+		}
+		
+		//Get the date from the session
+		LocalDate date = currentUser.getSessionById(sessionId).getDate();
+		
+		//Get a reportId from AccountDetails
+		long reportId = currentUser.getDetails().giveNextReportId();
+		
+		//Create the HealthReport object
+		HealthReport toAdd = new HealthReport(date, rating, comment, 
+				serious, conditionId, sessionId, reportId);
+		
+		//Add the HealthReport to the HealthState
+		currentUser.addReport(toAdd);
+		
+	}
 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		System.out.println(gson.toJson(currentUser.getDetails()));
+	private void addCondition(User currentUser) {
+		
+		//Collect all the information about the condition
+		
+		//Name
+		System.out.print("Name for this condition: ");
+		String name = input.nextLine().trim();
+		
+		//Start date
+		//Get the date
+		System.out.print("Start date for this condition: ");
+		boolean dateSuccess = false;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TrainingPlanner.DATE_FORMAT);
+		LocalDate date = null;
+		
+		while(!dateSuccess) {
+			
+			String text = input.nextLine().trim();
+			
+			try {
+				date = LocalDate.parse(text, formatter);
+				dateSuccess = true;
+			} catch (DateTimeParseException e) {
+				System.out.print("Date error. Please enter date in format (" + TrainingPlanner.DATE_FORMAT + "): ");
+			}
+			
+		}
+		
+		//Banned Sports
+		//Print out the current sports
+		System.out.print("Your current sports are: ");
+		for(Sport sport : currentUser.getDetails().getSports()) {
+			System.out.print(sport.getName() + " ");
+		}
+		
+		//Get a list of sports that are not acceptable
+		System.out.print("\nEnter the sports which you should not do with this condition (space separated): ");
+		String bannedSportsString = input.nextLine();
+		ArrayList<Sport> bannedSports = new ArrayList<Sport>();
+		
+		for(Sport sport: currentUser.getDetails().getSports()) {	
+			for(String sportString: bannedSportsString.split(" ")) {
+				if(sport.getName().equalsIgnoreCase(sportString)) {
+					bannedSports.add(sport);
+					break;
+				}
+			}
+		}
+		
+		//Illness or Injury
+		System.out.print("Is the condition an illness (y for illness/n for injury)? ");
+		String response = input.nextLine().trim();
+		boolean illness = false;
+		
+		if(response.toLowerCase().equals("y")) {
+			illness = true;
+		}
+		
+		//Get the next Id from AccountDetails
+		long conditionId = currentUser.getDetails().giveNextConditionId();
+		
+		//Create the HealthCondition object
+		HealthCondition toAdd = new HealthCondition(name, date, illness, conditionId);
+		
+		//Add the bannedSports
+		for(Sport sport: bannedSports) {
+			toAdd.addBannedSport(sport);
+		}
+		
+		//Add the HealthCondition to the user.
+		currentUser.addCondition(toAdd);
 		
 	}
 
