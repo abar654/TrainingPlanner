@@ -18,60 +18,75 @@ public class User {
 		state = new HealthState();
 	}
 
+	/*
+	 * Methods for handling the calendar
+	 */
 	public void addSession(Session newSession) {
 		calendar.addSession(newSession);
 	}
 
-	public void addCondition(HealthCondition newCondition) {
-		state.addCondition(newCondition);
-	}
-
 	public void removeSession(Session toRemove) {
 		calendar.removeSession(toRemove);		
+	}
+	
+	public Session getSessionById(long sessionId) {
+		return calendar.getSessionById(sessionId);
+	}
+	
+	public TrainingWeek getTrainingWeek(LocalDate focusDate) {
+		return calendar.getTrainingWeek(focusDate);	
+	}
+
+	/*
+	 * Methods for handling HealthConditions
+	 */
+	
+	public void addCondition(HealthCondition newCondition) {
+		state.addCondition(newCondition);
 	}
 
 	public void removeCondition(HealthCondition toRemove) {
 		state.removeCondition(toRemove);
 	}
 	
-	public AccountDetails getDetails() {
-		return details;
-	}
-
-	public Session getSessionById(long sessionId) {
-		return calendar.getSessionById(sessionId);
-	}
-
-	public TrainingWeek getTrainingWeek(LocalDate focusDate) {
-		return calendar.getTrainingWeek(focusDate);	
-	}
-	
 	public ArrayList<HealthCondition> getConditions(LocalDate focusDate) {
 		return state.getConditions(focusDate);
 	}
 	
-	public ArrayList<Recommendation> getRecommendations(LocalDate focusDate) {
-		return Recommendation.makeRecommendations(getTrainingWeek(focusDate), getConditions(focusDate));
+	public HealthCondition getConditionById(long conditionId) {
+		return state.getConditionById(conditionId);
 	}
-
+	
+	/*
+	 * Methods for handling HealthReports
+	 */
+	
 	public HealthReport getReportById(long reportId) {
-		// TODO Auto-generated method stub
-		return null;
+		return state.getReportById(reportId);
 	}
 
 	public void removeReport(HealthReport toRemove) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public HealthCondition getConditionById(long conditionId) {
-		// TODO Auto-generated method stub
-		return null;
+		state.removeReport(toRemove);
 	}
 
 	public void addReport(HealthReport toAdd) {
-		// TODO Auto-generated method stub
-		
+		state.addReport(toAdd);
+	}
+	
+	/*
+	 * Methods for handling AccountDetails
+	 */
+	
+	public AccountDetails getDetails() {
+		return details;
+	}
+
+	/*
+	 * Methods for handling Recommendations
+	 */
+	
+	public ArrayList<Recommendation> getRecommendations(LocalDate focusDate) {
+		return Recommendation.makeRecommendations(getTrainingWeek(focusDate), getConditions(focusDate));
 	}
 
 }
