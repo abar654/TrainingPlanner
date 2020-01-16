@@ -6,18 +6,12 @@ public class HealthState {
 	
 	ArrayList<HealthCondition> conditions;
 	HashMap<Long, Long> reportIdToConditionId;
-	long nextReportId;
-	long nextConditionId;
 	
 	public HealthState() {
 		
 		//Initialise the collections
 		conditions = new ArrayList<HealthCondition>();
 		reportIdToConditionId = new HashMap<Long, Long>();
-		
-		//Initialise the ID counters
-		nextReportId = 0;
-		nextConditionId = 0;
 		
 	}
 	

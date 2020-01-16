@@ -620,10 +620,10 @@ public class CommandLineInterface {
 		}
 		
 		//Get the sessionId to relate it to
-		System.out.print("Enter the session id for the session associated with this report: ");
+		System.out.print("Enter the session id for the session associated with this report (if no session enter -1): ");
 		long sessionId = -1;
 		
-		while(sessionId < 0) {
+		while(sessionId < -1) {
 			
 			String idInput = input.nextLine().trim();
 			
@@ -635,8 +635,14 @@ public class CommandLineInterface {
 			
 		}
 		
-		//Get the date from the session
-		LocalDate date = currentUser.getSessionById(sessionId).getDate();
+		//Get the date
+		LocalDate date = LocalDate.now();
+				
+		if(sessionId != -1) {
+			//If there is a session, then should be the same date as the session
+			date = currentUser.getSessionById(sessionId).getDate();
+		}
+		
 		
 		//Get a reportId from AccountDetails
 		long reportId = currentUser.getDetails().giveNextReportId();

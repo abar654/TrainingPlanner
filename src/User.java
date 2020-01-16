@@ -118,6 +118,12 @@ public class User {
 			//Add to the health state
 			state.addReport(toAdd);
 			
+		} else if(toAdd.getSessionId() == -1) {
+			
+			//This is a sessionless report
+			//Add to the health state
+			state.addReport(toAdd);
+			
 		}
 		
 	}

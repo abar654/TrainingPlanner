@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 
 public class HealthReport {
 
@@ -20,6 +21,16 @@ public class HealthReport {
 	public long getSessionId() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public boolean isSerious() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public LocalDate getDate() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
