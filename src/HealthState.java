@@ -1,40 +1,89 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HealthState {
+	
+	ArrayList<HealthCondition> conditions;
+	HashMap<Long, Long> reportIdToConditionId;
+	long nextReportId;
+	long nextConditionId;
+	
+	public HealthState() {
+		
+		//Initialise the collections
+		conditions = new ArrayList<HealthCondition>();
+		reportIdToConditionId = new HashMap<Long, Long>();
+		
+		//Initialise the ID counters
+		nextReportId = 0;
+		nextConditionId = 0;
+		
+	}
+	
+	/*
+	 * Methods to handle conditions
+	 */
 
 	public void addCondition(HealthCondition newCondition) {
-		// TODO Auto-generated method stub
-		
+		conditions.add(newCondition);		
 	}
 
 	public void removeCondition(HealthCondition toRemove) {
-		// TODO Auto-generated method stub
-		
+		conditions.remove(toRemove);		
 	}
 
 	public ArrayList<HealthCondition> getConditions(LocalDate focusDate) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<HealthCondition> copy = new ArrayList<HealthCondition>();
+		if(!conditions.isEmpty()) {
+			copy.addAll(conditions);
+		}
+		return copy;
 	}
-
-	public HealthReport getReportById(long reportId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void removeReport(HealthReport toRemove) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	public HealthCondition getConditionById(long conditionId) {
-		// TODO Auto-generated method stub
+		for(HealthCondition condition : conditions) {
+			if(condition.getId() == conditionId) {
+				return condition;
+			}
+		}
 		return null;
 	}
+	
+	/*
+	 * Methods to handle reports
+	 */
 
 	public void addReport(HealthReport toAdd) {
-		// TODO Auto-generated method stub
+		
+		long conditionId = toAdd.getConditionId();
+		
+		//Add the reportId to the map so it can be found later
+		reportIdToConditionId.put(toAdd.getId(), conditionId);
+		
+		//Add the report to its relevant condition
+		getConditionById(conditionId).addReport(toAdd);
+		
+	}
+	
+	public void removeReport(HealthReport toRemove) {
+		
+		//Remove the report from the condition
+		long conditionId = toRemove.getConditionId();
+		getConditionById(conditionId).removeReport(toRemove);
+		
+		//Remove the report from the look up map
+		reportIdToConditionId.remove(toRemove.getId());
+		
+	}
+	
+	public HealthReport getReportById(long reportId) {
+		
+		//Get the condition
+		HealthCondition condition = getConditionById(reportIdToConditionId.get(reportId));
+		
+		//Get the report
+		return condition.getReportById(reportId);
 		
 	}
 

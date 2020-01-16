@@ -26,7 +26,21 @@ public class User {
 	}
 
 	public void removeSession(Session toRemove) {
-		calendar.removeSession(toRemove);		
+		
+		//Remove from the calendar
+		calendar.removeSession(toRemove);
+		
+		//Remove its associated HealthReports
+		for(Long reportId : toRemove.getReports()) {
+			
+			HealthReport report = getReportById(reportId);
+			
+			if(report != null) {
+				removeReport(report);
+			}
+			
+		}
+		
 	}
 	
 	public Session getSessionById(long sessionId) {
@@ -46,7 +60,21 @@ public class User {
 	}
 
 	public void removeCondition(HealthCondition toRemove) {
+		
+		//Remove from the HealthState
 		state.removeCondition(toRemove);
+		
+		//Remove all the HealthReports in this condition from their sessions
+		for(HealthReport report : toRemove.getReports()) {
+			
+			//Remove this report from its session
+			Session removeFrom = getSessionById(report.getSessionId());
+			if(removeFrom != null) {
+				removeFrom.removeReport(report.getId());
+			}
+			
+		}
+		
 	}
 	
 	public ArrayList<HealthCondition> getConditions(LocalDate focusDate) {
@@ -66,11 +94,32 @@ public class User {
 	}
 
 	public void removeReport(HealthReport toRemove) {
+		
+		//Remove from the HealthState
 		state.removeReport(toRemove);
+		
+		//Remove from its session
+		Session removeFrom = getSessionById(toRemove.getSessionId());
+		if(removeFrom != null) {
+			removeFrom.removeReport(toRemove.getId());
+		}
+		
 	}
 
 	public void addReport(HealthReport toAdd) {
-		state.addReport(toAdd);
+		
+		//Add to the correct session
+		//If the session does not exist then we shouldn't add the report
+		Session addTo = getSessionById(toAdd.getSessionId());
+		if(addTo != null) {
+			
+			addTo.addReport(toAdd.getId());
+			
+			//Add to the health state
+			state.addReport(toAdd);
+			
+		}
+		
 	}
 	
 	/*
