@@ -1,0 +1,109 @@
+Andrew
+21 11 1993
+Running
+abarn@wean.com
+abarn1993
+add-session
+01 01 2020
+Running
+Easy
+5
+25
+4
+Easy plod.
+y
+add-session
+04 01 2020
+Strength
+y
+Core
+0
+20
+3
+Abs rock hard
+y
+add-session
+09 01 2020
+Strength
+Legs
+0
+30
+2
+physio leg sesh
+y
+add-session
+15 01 2020
+Running
+Intervals
+6
+30
+6
+not feeling great
+y
+add-condition
+Cold
+31 12 2019
+Running
+y
+add-report
+0
+4
+Feeling clogged up
+y
+1
+add-report
+0
+2
+Feeling better but still a bit of snot.
+n
+2
+add-report
+0
+1
+Getting better.
+n
+-1
+add-condition
+Knee
+08 01 2020
+Running, Strength
+y
+add-report
+1
+2
+Feeling a knee niggle.
+n
+2
+add-report
+1
+4
+Knee started aching after 15 mins
+y
+3
+show-conditions
+show-sessions
+set-date
+02 01 2020
+show-conditions
+show-sessions
+remove-report
+0
+show-conditions
+show-sessions
+set-date
+19 01 2020
+remove-session
+3
+show-conditions
+show-sessions
+remove-condition
+1
+show-conditions
+show-sessions
+set-date
+10 01 2020
+show-conditions
+show-sessions
+save
+exit
+y

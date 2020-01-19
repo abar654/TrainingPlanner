@@ -621,7 +621,7 @@ public class CommandLineInterface {
 		
 		//Get the sessionId to relate it to
 		System.out.print("Enter the session id for the session associated with this report (if no session enter -1): ");
-		long sessionId = -1;
+		long sessionId = Integer.MIN_VALUE;
 		
 		while(sessionId < -1) {
 			
@@ -688,17 +688,17 @@ public class CommandLineInterface {
 		//Print out the current sports
 		System.out.print("Your current sports are: ");
 		for(Sport sport : currentUser.getDetails().getSports()) {
-			System.out.print(sport.getName() + " ");
+			System.out.print("'" + sport.getName() + "' ");
 		}
 		
 		//Get a list of sports that are not acceptable
-		System.out.print("\nEnter the sports which you should not do with this condition (space separated): ");
+		System.out.print("\nEnter the sports which you should not do with this condition (comma separated): ");
 		String bannedSportsString = input.nextLine();
 		ArrayList<Sport> bannedSports = new ArrayList<Sport>();
 		
 		for(Sport sport: currentUser.getDetails().getSports()) {	
-			for(String sportString: bannedSportsString.split(" ")) {
-				if(sport.getName().equalsIgnoreCase(sportString)) {
+			for(String sportString: bannedSportsString.split(",")) {
+				if(sport.getName().equalsIgnoreCase(sportString.trim())) {
 					bannedSports.add(sport);
 					break;
 				}

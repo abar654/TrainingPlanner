@@ -1,0 +1,159 @@
+Create the new user:
+
+Andrew
+21 11 1993
+Running
+abarn@wean.com
+abarn1993
+
+Create 2 sessions from 2 weeks ago, running and strength:
+
+add-session
+01 01 2020
+Running
+Easy
+5
+25
+4
+Easy plod.
+y
+add-session
+04 01 2020
+Strength
+y
+Core
+0
+20
+3
+Abs rock hard
+y
+
+Create 1 session from last week strength:
+
+add-session
+09 01 2020
+Strength
+Legs
+0
+30
+2
+physio leg sesh
+y
+
+Create 1 session from this week running:
+
+add-session
+15 01 2020
+Running
+Intervals
+6
+30
+6
+not feeling great
+y
+
+Add a new condition that started 2 weeks ago:
+
+add-condition
+Cold
+31 12 2019
+Running
+y
+
+Add a report for the condition which is for the later session 2 weeks ago, make it serious:
+
+add-report
+0
+4
+Feeling clogged up
+y
+1
+
+Add report for the session last week, make it not serious:
+
+add-report
+0
+2
+Feeling better but still a bit of snot.
+n
+2
+
+Add a report for this week which is not associated with a session:
+
+add-report
+0
+1
+Getting better.
+n
+-1
+
+Add a new condition that started last week, both sports banned:
+
+add-condition
+Knee
+08 01 2020
+Running, Strength
+y
+
+Add a report associated with the session last week:
+
+add-report
+1
+2
+Feeling a knee niggle.
+n
+2
+
+Add a report associated with the session this week:
+
+add-report
+1
+4
+Knee started aching after 15 mins
+y
+3
+
+show-conditions
+show-sessions
+
+set-date
+02 01 2020
+
+show-conditions
+show-sessions
+
+Remove the report for the first condition 2 weeks ago:
+
+remove-report
+0
+
+show-conditions
+show-sessions
+
+set-date
+19 01 2020
+
+Remove the session this week:
+
+remove-session
+3
+
+show-conditions
+show-sessions
+
+Remove the condition that started last week:
+
+remove-condition
+1
+
+show-conditions
+show-sessions
+
+Change the date to last week:
+
+set-date
+10 01 2020
+
+show-conditions
+show-sessions
+save

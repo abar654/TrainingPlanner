@@ -43,8 +43,8 @@ public class TrainingPlanner {
 		
 		//Name of testfile if any
 		//Set to null to input via commandline directly
-		//String testfile = "test2-weekdata";
-		String testfile = null;
+		String testfile = "test3-healthdata";
+		//String testfile = null;
 		
 		//Run the commandline interface
 		system.runCMD(args, testfile);

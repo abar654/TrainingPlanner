@@ -16,7 +16,6 @@
       "name": "Running",
       "sessionTypes": [
         "Easy",
-        "Long",
         "Intervals"
       ]
     },
@@ -29,7 +28,6 @@
         "name": "Running",
         "sessionTypes": [
           "Easy",
-          "Long",
           "Intervals"
         ]
       },
@@ -43,29 +41,11 @@
           "Core",
           "Legs"
         ]
-      },
-      {
-        "color": {
-          "value": -16777216,
-          "falpha": 0.0
-        },
-        "name": "Pool Running",
-        "sessionTypes": [
-          "Intervals"
-        ]
-      },
-      {
-        "color": {
-          "value": -16777216,
-          "falpha": 0.0
-        },
-        "name": "Climbing",
-        "sessionTypes": [
-          "Gym"
-        ]
       }
     ],
-    "nextSessionId": 12
+    "nextSessionId": 4,
+    "nextReportId": 5,
+    "nextConditionId": 2
   },
   "calendar": {
     "sessions": [
@@ -78,7 +58,6 @@
           "name": "Running",
           "sessionTypes": [
             "Easy",
-            "Long",
             "Intervals"
           ]
         },
@@ -91,36 +70,9 @@
         "id": 0,
         "reportIds": [],
         "date": {
-          "year": 2019,
-          "month": 12,
+          "year": 2020,
+          "month": 1,
           "day": 1
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Running",
-          "sessionTypes": [
-            "Easy",
-            "Long",
-            "Intervals"
-          ]
-        },
-        "sessionType": "Long",
-        "distance": 25.0,
-        "duration": 100,
-        "intensity": 5,
-        "comment": "Good session, maintained solid pace",
-        "completed": true,
-        "id": 1,
-        "reportIds": [],
-        "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 2
         }
       },
       {
@@ -138,69 +90,15 @@
         "sessionType": "Core",
         "distance": 0.0,
         "duration": 20,
-        "intensity": 4,
-        "comment": "The usual ab sesh",
+        "intensity": 3,
+        "comment": "Abs rock hard",
         "completed": true,
-        "id": 2,
+        "id": 1,
         "reportIds": [],
         "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 8
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Running",
-          "sessionTypes": [
-            "Easy",
-            "Long",
-            "Intervals"
-          ]
-        },
-        "sessionType": "Intervals",
-        "distance": 6.0,
-        "duration": 30,
-        "intensity": 7,
-        "comment": "Long fartlek, feeling good…",
-        "completed": true,
-        "id": 3,
-        "reportIds": [],
-        "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 11
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Running",
-          "sessionTypes": [
-            "Easy",
-            "Long",
-            "Intervals"
-          ]
-        },
-        "sessionType": "Long",
-        "distance": 16.0,
-        "duration": 65,
-        "intensity": 5,
-        "comment": "Felt ok",
-        "completed": true,
-        "id": 4,
-        "reportIds": [],
-        "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 16
+          "year": 2020,
+          "month": 1,
+          "day": 4
         }
       },
       {
@@ -218,148 +116,78 @@
         "sessionType": "Legs",
         "distance": 0.0,
         "duration": 30,
-        "intensity": 3,
-        "comment": "Physio exercises",
+        "intensity": 2,
+        "comment": "physio leg sesh",
         "completed": true,
-        "id": 5,
-        "reportIds": [],
-        "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 20
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Running",
-          "sessionTypes": [
-            "Easy",
-            "Long",
-            "Intervals"
-          ]
-        },
-        "sessionType": "Easy",
-        "distance": 8.0,
-        "duration": 40,
-        "intensity": 4,
-        "comment": "Cruising.",
-        "completed": true,
-        "id": 6,
-        "reportIds": [],
-        "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 22
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Pool Running",
-          "sessionTypes": [
-            "Intervals"
-          ]
-        },
-        "sessionType": "Intervals",
-        "distance": 0.0,
-        "duration": 30,
-        "intensity": 5,
-        "comment": "Good sesh, feeling a niggle",
-        "completed": true,
-        "id": 7,
-        "reportIds": [],
-        "date": {
-          "year": 2019,
-          "month": 12,
-          "day": 27
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Running",
-          "sessionTypes": [
-            "Easy",
-            "Long",
-            "Intervals"
-          ]
-        },
-        "sessionType": "Easy",
-        "distance": 6.0,
-        "duration": 30,
-        "intensity": 4,
-        "comment": "Testing the knee.",
-        "completed": true,
-        "id": 8,
-        "reportIds": [],
+        "id": 2,
+        "reportIds": [
+          1
+        ],
         "date": {
           "year": 2020,
           "month": 1,
-          "day": 1
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Strength",
-          "sessionTypes": [
-            "Core",
-            "Legs"
-          ]
-        },
-        "sessionType": "Core",
-        "distance": 0.0,
-        "duration": 20,
-        "intensity": 4,
-        "comment": "the usual",
-        "completed": true,
-        "id": 9,
-        "reportIds": [],
-        "date": {
-          "year": 2020,
-          "month": 1,
-          "day": 3
-        }
-      },
-      {
-        "sport": {
-          "color": {
-            "value": -16777216,
-            "falpha": 0.0
-          },
-          "name": "Climbing",
-          "sessionTypes": [
-            "Gym"
-          ]
-        },
-        "sessionType": "Gym",
-        "distance": 0.0,
-        "duration": 90,
-        "intensity": 3,
-        "comment": "Fun times, lots of good new problems. Sore big toe from small shoes.",
-        "completed": true,
-        "id": 11,
-        "reportIds": [],
-        "date": {
-          "year": 2020,
-          "month": 1,
-          "day": 4
+          "day": 9
         }
       }
     ]
   },
-  "state": {}
+  "state": {
+    "conditions": [
+      {
+        "name": "Cold",
+        "startDate": {
+          "year": 2019,
+          "month": 12,
+          "day": 31
+        },
+        "isIllness": true,
+        "id": 0,
+        "reports": [
+          {
+            "date": {
+              "year": 2020,
+              "month": 1,
+              "day": 9
+            },
+            "vasRating": 2,
+            "comment": "Feeling better but still a bit of snot.",
+            "isSerious": false,
+            "id": 1,
+            "sessionId": 2,
+            "conditionId": 0
+          },
+          {
+            "date": {
+              "year": 2020,
+              "month": 1,
+              "day": 19
+            },
+            "vasRating": 1,
+            "comment": "Getting better.",
+            "isSerious": false,
+            "id": 2,
+            "sessionId": -1,
+            "conditionId": 0
+          }
+        ],
+        "bannedSports": [
+          {
+            "color": {
+              "value": -16777216,
+              "falpha": 0.0
+            },
+            "name": "Running",
+            "sessionTypes": [
+              "Easy",
+              "Intervals"
+            ]
+          }
+        ]
+      }
+    ],
+    "reportIdToConditionId": {
+      "1": 0,
+      "2": 0
+    }
+  }
 }

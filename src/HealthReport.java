@@ -2,36 +2,74 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 
 public class HealthReport {
+	
+	private LocalDate date;
+	private int vasRating; //A rating from 1 to 10, 10 being the worst
+	private String comment;
+	private boolean isSerious;
+	private long id;
+	private long sessionId;
+	private long conditionId;
 
 	public HealthReport(LocalDate date, int rating, String comment, boolean serious, long conditionId, long sessionId,
 			long reportId) {
-		// TODO Auto-generated constructor stub
+		
+		this.date = date;
+		this.vasRating = rating;
+		this.comment = comment;
+		this.isSerious = serious;
+		this.id = reportId;
+		this.conditionId = conditionId;
+		this.sessionId = sessionId;		
+		
 	}
-
-	public long getConditionId() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public LocalDate getDate() {
+		return date;
+	}
+	
+	public int getRating() {
+		return vasRating;
+	}
+	
+	public String getComment() {
+		return comment;
 	}
 
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 
 	public long getSessionId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sessionId;
+	}
+	
+	public long getConditionId() {
+		return conditionId;
 	}
 
 	public boolean isSerious() {
-		// TODO Auto-generated method stub
-		return false;
+		return isSerious;
 	}
-
-	public LocalDate getDate() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void setDate(LocalDate newDate) {
+		date = newDate;
 	}
-
+	
+	public void setRating(int newRating) {
+		vasRating = newRating;
+	}
+	
+	public void setComment(String newComment) {
+		comment = newComment;
+	}
+	
+	public void setSerious(boolean newSerious) {
+		isSerious = newSerious;
+	}
+	
+	public void setSessionId(long newSessionId) {
+		sessionId = newSessionId;
+	}
 
 }
